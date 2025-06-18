@@ -1,0 +1,131 @@
+{% extends 'master.html' %}
+
+{% block body %}
+    
+
+    
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Resume</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #eef2f7, #f5f7fa);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        form label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #444;
+        }
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="tel"],
+        form input[type="number"],
+        form input[type="file"],
+        form input[type="date"],
+        form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-top: 25px;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Resume</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label for="full_name">Full Name</label>
+            <input type="text" name="Full_Name" value="{{resume.Full_Name}}" id="full_name" required>
+
+            <label for="profile_pic">Profile Picture</label>
+            <input type="file" name="Profile_Picture" id="profile_pic" accept="image/*">
+
+            <label for="email">Email</label>
+            <input type="email" name="Email" value="{{resume.Email}}"  id="email" required>
+
+            <label for="phone">Phone</label>
+            <input type="tel" name="Phone" value="{{resume.Phone}}" id="phone" required>
+
+            <label for="address">Address</label>
+            <input type="text" name="Address" value="{{resume.Address}}" id="address">
+
+            <label for="summary">Summary</label>
+            <textarea name="Summary" id="summary" placeholder="A short personal objective...">{{resume.Summary}}</textarea>
+
+            <label for="degree">Degree</label>
+            <input type="text" name="Degree" value="{{resume.Degree}}" id="degree">
+
+            <label for="institute">Institute Name</label>
+            <input type="text" name="Institute_Name" value="{{resume.Institute_Name}}" id="institute">
+
+            <label for="graduation">Year of Graduation</label>
+            <input type="date" name="Year_of_Graduation" value="{{resume.Year_of_Graduation|date:'Y-m-d'}}" id="graduation">
+
+            <label for="company">Company Name</label>
+            <input type="text" name="Company_Name" value="{{resume.Company_Name}}" id="company">
+
+            <label for="position">Position</label>
+            <input type="text" name="Position" value="{{resume.Position}}" id="position">
+
+            <label for="experience">Years of Experience</label>
+            <input type="number" name="Years_of_Experience" value={{resume.Years_of_Experience}} id="experience" min="0">
+
+            <label for="skills">Skills (comma-separated)</label>
+            <textarea name="Skills" id="skills" placeholder="e.g. Python, Django, HTML, CSS">{{resume.Skills}} </textarea>
+
+            <label for="hobbies">Hobbies (comma-separated)</label>
+            <textarea name="Hobbies" id="hobbies" placeholder="e.g. Reading, Traveling, Gaming">{{resume.Hobbies}}</textarea>
+
+            <label for="achievements">Achievements (comma-separated)</label>
+            <textarea name="Achievements" id="achievements" placeholder="e.g. Hackathon Winner, Employee of the Month">{{resume.Achievements}}</textarea>
+
+            <button type="submit">Update Resume</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock body %}
